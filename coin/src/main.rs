@@ -1,17 +1,27 @@
 enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter,
+    Sen,
+    Gosen,
+    Ichiman(Keio),
 }
 
-fn value_in_cents(coin: Coin) -> u32 {
+#[derive(Debug)]
+enum Keio {
+    Fukuzawa,
+    Kitazato,
+}
+
+fn value_in_coin(coin: &Coin) -> u32 {
     match coin {
-        Coin::Penny => 1,
-        Coin::Nickel => 5,
-        Coin::Dime => 10,
-        Coin::Quarter => 25,
+        Coin::Sen => 1000,
+        Coin::Gosen => 5000,
+        Coin::Ichiman(keio) => {
+            println!("肖像画は {:?} です。", keio);
+            10000
+        }
     }
 }
 
-fn main() {}
+fn main() {
+    let coin = Coin::Ichiman(Keio::Fukuzawa);
+    value_in_coin(&coin);
+}
